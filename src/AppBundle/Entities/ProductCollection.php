@@ -106,7 +106,7 @@ class ProductCollection {
 
 	/**
 	 * Get the total
-	 * 
+	 *
 	 * @return mixed
 	 */
 	public function getTotal() {
