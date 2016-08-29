@@ -1,0 +1,14 @@
+build:
+    environment:
+        php:
+            version: 5.4
+    tests:
+        override:
+            -
+                command: phpunit -c app/ --coverage-clover="coverage"
+                coverage:
+                    file: coverage
+                    format: php-clover
+filter:
+    excluded_paths:
+        - src/AppBundle/Tests/*
