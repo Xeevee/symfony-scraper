@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Tests\Transformers\Product;
+namespace AppBundle\Tests\Services\Transformers\Product;
 
 use AppBundle\Entities\Product;
 use AppBundle\Services\Transformers\Product\Transformer;
