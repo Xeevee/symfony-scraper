@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entities;
 
+use AppBundle\Entities\Exceptions\UnexpectedTypeException;
+
 class ProductCollection {
 
 	/**
@@ -63,9 +65,11 @@ class ProductCollection {
 	 * @return $this
 	 */
 	public function addMultiple( array $products ) {
-		foreach ( $products as $product ) {
+		foreach ( $products as $index => $product ) {
 			if ( $product instanceof Product ) {
 				$this->add( $product );
+			} else {
+				throw new UnexpectedTypeException( 'The $products parameter must be an array of AppBundle\Entities\Product, index "' . $index . '" is "' . gettype( $product ) . '"' );
 			}
 		}
 
