@@ -95,7 +95,7 @@ class Product {
 	/**
 	 * Set the size
 	 *
-	 * Must be numeric
+	 * Should be represented in bytes, and must evaluate as numeric
 	 *
 	 * @param mixed $size
 	 *
