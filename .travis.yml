@@ -7,3 +7,4 @@ php:
 install:
   - composer self-update
   - composer install
+script: phpunit -c app/ --coverage-clover="coverage.xml"
