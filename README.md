@@ -1,68 +1,28 @@
-Symfony Standard Edition
-========================
+[![Build Status](https://travis-ci.org/Xeevee/symfony-scraper.svg?branch=master)](https://travis-ci.org/Xeevee/symfony-scraper)
+[![Build Status](https://scrutinizer-ci.com/g/Xeevee/symfony-scraper/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Xeevee/symfony-scraper/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Xeevee/symfony-scraper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Xeevee/symfony-scraper/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Xeevee/symfony-scraper/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Xeevee/symfony-scraper/?branch=master)
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+# Product Scraper
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+## Installation
 
-What's inside?
---------------
+1. Navigation to your base installation path: `cd /path/to/projects`
+2. Create a new directory for the application: `mkdir scraper`
+3. Navigate to the new directory: `cd scraper`
+4. Clone the repository via: `git clone https://github.com/Xeevee/symfony-scraper.git`
+5. Run composer install: `composer install`
 
-The Symfony Standard Edition is configured with the following defaults:
+### System requirements
 
-  * An AppBundle you can use to start coding;
+The scraper requires `php 5.4` or higher, and is built on top of `Symfony 2.8`. with the exception of the PHP 5.4 version bump, there are no specific requirements extending beyond theirs, which can be found here: http://symfony.com/doc/2.8/reference/requirements.html
 
-  * Twig as the only configured template engine;
+## Running the application
+Once the application is installed you can execute the scrape via the CLI: `php app/console app:run`
 
-  * Doctrine ORM/DBAL;
+A JSON representation of the scraped products will be printed to the console output.
 
-  * Swiftmailer;
+## Running tests
+You can run the test suite via the CLI with the following command: `phpunit -c app/`
 
-  * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/2.8/book/installation.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/2.8/book/doctrine.html
-[8]:  https://symfony.com/doc/2.8/book/templating.html
-[9]:  https://symfony.com/doc/2.8/book/security.html
-[10]: https://symfony.com/doc/2.8/cookbook/email.html
-[11]: https://symfony.com/doc/2.8/cookbook/logging/monolog.html
-[13]: https://symfony.com/doc/2.8/bundles/SensioGeneratorBundle/index.html
+The test suite is built on top of PHPUnit 4.8, so you can refer to their documentation for more advanced usage: https://phpunit.de/manual/4.8/en/index.html
