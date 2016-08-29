@@ -125,6 +125,8 @@ class Product {
 	 *
 	 * Must be numeric
 	 *
+	 * TODO: Would typically store this in the lowest unit (Pence) in preparation for persistence
+	 *
 	 * @param mixed $unitPrice
 	 *
 	 * @return $this
