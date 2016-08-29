@@ -87,7 +87,7 @@ class ProductCollection {
 	 */
 	public function remove( $key ) {
 		if ( isset( $this->products[ $key ] ) ) {
-			$this->total -= $this->products[ $key ]['unitPrice'];
+			$this->total -= $this->products[ $key ]->getUnitPrice();
 			unset( $this->products[ $key ] );
 		}
 
