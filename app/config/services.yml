@@ -1,9 +1,30 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
+    app.command.run.default_name: null
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    # Guzzle Client
+    guzzle.client:
+        class: GuzzleHttp\Client
+
+    # Product Scraper
+    app.scrapers.product.scraper:
+        class: AppBundle\Services\Scrapers\Product\Scraper
+        arguments: ["@guzzle.client"]
+
+    # Product Transformer
+    app.transformers.product.transformer:
+        class: AppBundle\Services\Transformers\Product\Transformer
+
+    # Product collection transformer
+    app.transformers.product_collection.transformer:
+        class: AppBundle\Services\Transformers\ProductCollection\Transformer
+        arguments: ["@app.transformers.product.transformer"]
+
+    # Convert Symfony Command to a server to enable DI
+    app.command.run:
+        class: AppBundle\Command\AppRunCommand
+        arguments: ["%app.command.run.default_name%", "@app.scrapers.product.scraper", "@app.transformers.product_collection.transformer"]
+        tags:
+            -  { name: console.command }
