@@ -16,7 +16,7 @@ class ProductCollection {
 	/**
 	 * The total unit price of the products
 	 *
-	 * @var float
+	 * @var mixed
 	 */
 	private $total;
 
