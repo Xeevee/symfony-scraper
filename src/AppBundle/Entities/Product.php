@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entities;
 
+use AppBundle\Entities\Exceptions\UnexpectedTypeException;
+
 class Product {
 
 	/**
@@ -76,6 +78,8 @@ class Product {
 	public function setTitle( $title ) {
 		if ( is_string( $title ) ) {
 			$this->title = $title;
+		} else {
+			throw new UnexpectedTypeException( 'The $title parameter must be a string, "' . gettype( $title ) . '" received.' );
 		}
 
 		return $this;
@@ -104,6 +108,8 @@ class Product {
 	public function setSize( $size ) {
 		if ( is_numeric( $size ) ) {
 			$this->size = $size;
+		} else {
+			throw new UnexpectedTypeException( 'The $size parameter must be numeric, "' . gettype( $size ) . '" received.' );
 		}
 
 		return $this;
@@ -134,6 +140,8 @@ class Product {
 	public function setUnitPrice( $unitPrice ) {
 		if ( is_numeric( $unitPrice ) ) {
 			$this->unitPrice = $unitPrice;
+		} else {
+			throw new UnexpectedTypeException( 'The $unitPrice parameter must be a numeric, "' . gettype( $unitPrice ) . '"" received.' );
 		}
 
 		return $this;
@@ -158,6 +166,8 @@ class Product {
 	public function setDescription( $description ) {
 		if ( is_string( $description ) ) {
 			$this->description = $description;
+		} else {
+			throw new UnexpectedTypeException( 'The $description parameter must be a string, "' . gettype( $description ) . '"" received.' );
 		}
 
 		return $this;
