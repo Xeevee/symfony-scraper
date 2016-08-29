@@ -9,6 +9,3 @@ build:
                 coverage:
                     file: coverage
                     format: php-clover
-filter:
-    excluded_paths:
-        - src/AppBundle/Tests/*
