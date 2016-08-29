@@ -7,11 +7,9 @@
 
 ## Installation
 
-1. Navigation to your base installation path: `cd /path/to/projects`
-2. Create a new directory for the application: `mkdir scraper`
-3. Navigate to the new directory: `cd scraper`
-4. Clone the repository via: `git clone https://github.com/Xeevee/symfony-scraper.git`
-5. Run composer install: `composer install`
+1. Clone the repository via: `git clone https://github.com/Xeevee/symfony-scraper.git /path/to/project`
+2. Navigate to the project directory: `cd /path/to/project`
+3. Run composer install: `composer install`
 
 ### System requirements
 
