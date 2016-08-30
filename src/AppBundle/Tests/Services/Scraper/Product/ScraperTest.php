@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Tests\Services\Product;
+namespace AppBundle\Tests\Services\Scraper\Product;
 
 use AppBundle\Services\Scrapers\Product\Scraper;
 
@@ -17,7 +17,6 @@ class ScraperTest extends \PHPUnit_Framework_TestCase {
 		$scraper = new Scraper($this->sampleDocument);
 		$this->assertEquals('3.50', $scraper->getUnitPrice());
 	}
-
 
 	public function testGetDescription() {
 		$scraper = new Scraper($this->sampleDocument);
