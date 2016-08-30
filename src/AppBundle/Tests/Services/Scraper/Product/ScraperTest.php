@@ -13,14 +13,38 @@ class ScraperTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals('Some title', $scraper->getTitle());
 	}
 
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGetTitleNotFound() {
+		$scraper = new Scraper('');
+		$scraper->getTitle();
+	}
+
 	public function testGetUnitPrice() {
 		$scraper = new Scraper($this->sampleDocument);
 		$this->assertEquals('3.50', $scraper->getUnitPrice());
 	}
 
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGetUnitPriceNotFound() {
+		$scraper = new Scraper('');
+		$scraper->getUnitPrice();
+	}
+
 	public function testGetDescription() {
 		$scraper = new Scraper($this->sampleDocument);
 		$this->assertEquals('A description', $scraper->getDescription());
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGetDescriptionNotFound() {
+		$scraper = new Scraper('');
+		$scraper->getDescription();
 	}
 
 }
