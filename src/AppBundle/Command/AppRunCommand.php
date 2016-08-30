@@ -50,7 +50,7 @@ class AppRunCommand extends ContainerAwareCommand {
 	 * The resource to scrape
 	 *
 	 * Could be made a command argument, but feel it's unnecessary due to the specific nature of scraping
-	 * 
+	 *
 	 * @var string
 	 */
 	private $resource = 'http://hiring-tests.s3-website-eu-west-1.amazonaws.com/2015_Developer_Scrape/5_products.html';
@@ -124,7 +124,6 @@ class AppRunCommand extends ContainerAwareCommand {
 		$response = $this->client->get( $this->resource );
 
 		$this->collectionScraper->setDocument( $response->getBody()->getContents() );
-		$this->collectionScraper->setResource( $this->resource );
 
 		return $this->collectionScraper->getProductUrls();
 	}
