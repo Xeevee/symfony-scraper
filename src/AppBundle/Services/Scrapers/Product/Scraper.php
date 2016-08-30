@@ -25,10 +25,11 @@ class Scraper extends AbstractScraper implements ScraperInterface {
 	 */
 	public function getUnitPrice() {
 		$text = $this->crawler->filter( 'p.pricePerUnit' )->text();
-		preg_match( '([0-9]*\.[0-9]*)', $text, $matches );
 
-		if ( ! empty( $matches[0] ) ) {
+		if( preg_match( '([0-9]*\.[0-9]*)', $text, $matches ) )
+		{
 			return $matches[0];
+		} else {
 		}
 	}
 
