@@ -4,11 +4,11 @@ namespace AppBundle\Command;
 
 use AppBundle\Entities\Product;
 use AppBundle\Entities\ProductCollection;
-use AppBundle\Services\Scrapers\Product\Scraper;
-use AppBundle\Services\Scrapers\Products\ScraperInterface;
+use AppBundle\Services\Scrapers\Product\ScraperInterface as ProductScraperInterface;
+use AppBundle\Services\Scrapers\Products\ScraperInterface as ProductsScraperInterface;
 use AppBundle\Services\Transformers\ProductCollection\TransformerInterface;
 use Exception;
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\ResponseInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,13 +17,25 @@ use Symfony\Component\Console\Output\OutputInterface;
 class AppRunCommand extends ContainerAwareCommand {
 
 	/**
+	 * HTTP client for making requests
+	 *
+	 * @var ClientInterface
+	 */
+	private $client;
+
+	/**
+	 * Product collection scraper
+	 *
+	 * @var \AppBundle\Services\Scrapers\Products\ScraperInterface
+	 */
+	private $collectionScraper;
+
+	/**
 	 * Product scraper
 	 *
-	 * Scrapes the the data from the specified URL
-	 *
-	 * @var ScraperInterface
+	 * @var \AppBundle\Services\Scrapers\Product\ScraperInterface
 	 */
-	private $scraper;
+	private $productScraper;
 
 	/**
 	 * Product transformer
@@ -46,12 +58,16 @@ class AppRunCommand extends ContainerAwareCommand {
 	 * AppRunCommand constructor.
 	 *
 	 * @param null|string $name
-	 * @param ScraperInterface $scraper
+	 * @param ClientInterface $client
+	 * @param \AppBundle\Services\Scrapers\Products\ScraperInterface $collectionScraper
+	 * @param \AppBundle\Services\Scrapers\Product\ScraperInterface $productScraper
 	 * @param TransformerInterface $transformer
 	 */
-	public function __construct( $name, ScraperInterface $scraper, TransformerInterface $transformer ) {
-		$this->scraper     = $scraper;
-		$this->transformer = $transformer;
+	public function __construct( $name, ClientInterface $client, ProductsScraperInterface $collectionScraper, ProductScraperInterface $productScraper, TransformerInterface $transformer ) {
+		$this->client            = $client;
+		$this->collectionScraper = $collectionScraper;
+		$this->productScraper    = $productScraper;
+		$this->transformer       = $transformer;
 		parent::__construct( $name );
 	}
 
@@ -93,8 +109,7 @@ class AppRunCommand extends ContainerAwareCommand {
 	 * @return ResponseInterface
 	 */
 	private function getResponse( $url ) {
-		$client   = new Client();
-		$response = $client->get( $url );
+		$response = $this->client->get( $url );
 
 		return $response;
 	}
@@ -105,13 +120,12 @@ class AppRunCommand extends ContainerAwareCommand {
 	 * @return mixed
 	 */
 	private function getProductUrls() {
-		$client   = new Client();
-		$response = $client->get( $this->resource );
+		$response = $this->client->get( $this->resource );
 
-		$this->scraper->setDocument( $response->getBody()->getContents() );
-		$this->scraper->setResource( $this->resource );
+		$this->collectionScraper->setDocument( $response->getBody()->getContents() );
+		$this->collectionScraper->setResource( $this->resource );
 
-		return $this->scraper->getProductUrls();
+		return $this->collectionScraper->getProductUrls();
 	}
 
 	/**
@@ -122,12 +136,12 @@ class AppRunCommand extends ContainerAwareCommand {
 	 * @return Product
 	 */
 	private function buildProductEntity( ResponseInterface $response ) {
-		$scraper = new Scraper( $response->getBody()->getContents() );
+		$this->productScraper->setDocument( $response->getBody()->getContents() );
 		$product = new Product();
 
-		$product->setTitle( $scraper->getTitle() );
-		$product->setUnitPrice( $scraper->getUnitPrice() );
-		$product->setDescription( $scraper->getDescription() );
+		$product->setTitle( $this->productScraper->getTitle() );
+		$product->setUnitPrice( $this->productScraper->getUnitPrice() );
+		$product->setDescription( $this->productScraper->getDescription() );
 		$product->setSize( $response->getHeader( 'Content-Length' ) );
 
 		return $product;
