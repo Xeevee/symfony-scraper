@@ -10,7 +10,7 @@ class ProductCollectionTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Ensure the constructor adds the products correctly
 	 *
-	 * @covers AppBundle\Entities\ProductCollection::addMultiple
+	 * @covers \AppBundle\Entities\ProductCollection::addMultiple
 	 */
 	public function testConstructor() {
 		$products          = [
@@ -35,7 +35,7 @@ class ProductCollectionTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Ensure an UnexpectedTypeException is a value passed to addMultiple isn't an instance of product
 	 *
-	 * @covers ProductCollection::addMultiple
+	 * @covers \AppBundle\Entities\ProductCollection::addMultiple
 	 * @expectedException \AppBundle\Entities\Exceptions\UnexpectedTypeException
 	 */
 	public function testAddMultipleTypeException() {
