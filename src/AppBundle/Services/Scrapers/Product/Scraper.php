@@ -30,8 +30,6 @@ class Scraper extends AbstractScraper implements ScraperInterface {
 		if ( ! empty( $matches[0] ) ) {
 			return $matches[0];
 		}
-
-		return '';
 	}
 
 	/**
