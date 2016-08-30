@@ -19,7 +19,7 @@ class ScraperTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testSetResource() {
 		$scraper = new Scraper();
-		$scraper->setDocument( 1 );
+		$scraper->setResource( 1 );
 	}
 
 	public function testGetDocument() {
