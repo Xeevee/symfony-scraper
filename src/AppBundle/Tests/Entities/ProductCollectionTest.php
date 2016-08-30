@@ -7,6 +7,11 @@ use AppBundle\Entities\ProductCollection;
 
 class ProductCollectionTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * Ensure the constructor adds the products correctly
+	 *
+	 * @covers ProductCollection::addMultiple
+	 */
 	public function testConstructor() {
 		$products          = [
 			new Product( [
@@ -28,7 +33,10 @@ class ProductCollectionTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException AppBundle\Entities\Exceptions\UnexpectedTypeException
+	 * Ensure an UnexpectedTypeException is a value passed to addMultiple isn't an instance of product
+	 *
+	 * @covers ProductCollection::addMultiple
+	 * @expectedException \AppBundle\Entities\Exceptions\UnexpectedTypeException
 	 */
 	public function testAddMultipleTypeException() {
 		$productCollection = new ProductCollection();
@@ -39,6 +47,9 @@ class ProductCollectionTest extends \PHPUnit_Framework_TestCase {
 		$productCollection->addMultiple( $products );
 	}
 
+	/**
+	 * Ensure a product is added correctly and the total is modified accordingly
+	 */
 	public function testAdd() {
 		$productCollection = new ProductCollection();
 		$product           = new Product( [ 'unitPrice' => 10 ] );
@@ -47,6 +58,9 @@ class ProductCollectionTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 10, $productCollection->getTotal() );
 	}
 
+	/**
+	 * Ensure a product is removed correctly and the total is modified accordingly
+	 */
 	public function testRemove() {
 		$productCollection = new ProductCollection();
 		$product           = new Product( [ 'unitPrice' => 10 ] );
@@ -59,6 +73,9 @@ class ProductCollectionTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 10, $productCollection->getTotal() );
 	}
 
+	/**
+	 * Ensure a products are cleared and the total is modified accordingly
+	 */
 	public function testClear() {
 		$productCollection = new ProductCollection();
 		$product           = new Product( [ 'unitPrice' => 10 ] );

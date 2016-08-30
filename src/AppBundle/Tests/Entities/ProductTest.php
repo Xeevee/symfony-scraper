@@ -6,6 +6,9 @@ use AppBundle\Entities\Product;
 
 class ProductTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * Ensure the constructor populates the product correctly
+	 */
 	public function testConstructor() {
 		$product = new Product( [
 			'title'       => 'A title',
@@ -20,6 +23,9 @@ class ProductTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'A description', $product->getDescription() );
 	}
 
+	/**
+	 * Ensure the the title is set correctly
+	 */
 	public function testTitleSetsString() {
 		$product = new Product();
 
@@ -28,7 +34,11 @@ class ProductTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException AppBundle\Entities\Exceptions\UnexpectedTypeException
+	 * Ensure an UnexpectedTypeException is a value passed to setTitle
+	 *
+	 * TODO: Build this out for other potential value types
+	 *
+	 * @expectedException \AppBundle\Entities\Exceptions\UnexpectedTypeException
 	 */
 	public function testTitleTypeException() {
 		$product = new Product();
@@ -36,6 +46,9 @@ class ProductTest extends \PHPUnit_Framework_TestCase {
 		$product->setTitle( 1 );
 	}
 
+	/**
+	 * Ensure the the size is set correctly
+	 */
 	public function testSizeSetsNumeric() {
 		$product = new Product();
 
@@ -51,7 +64,11 @@ class ProductTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException AppBundle\Entities\Exceptions\UnexpectedTypeException
+	 * Ensure an UnexpectedTypeException is a value passed to setSize
+	 *
+	 * TODO: Build this out for other potential value types
+	 *
+	 * @expectedException \AppBundle\Entities\Exceptions\UnexpectedTypeException
 	 */
 	public function testSizeTypeException() {
 		$product = new Product();
@@ -59,6 +76,9 @@ class ProductTest extends \PHPUnit_Framework_TestCase {
 		$product->setSize( 'A string' );
 	}
 
+	/**
+	 * Ensure the the unit price is set correctly
+	 */
 	public function testUnitPriceSetsNumeric() {
 		$product = new Product();
 
@@ -74,7 +94,11 @@ class ProductTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException AppBundle\Entities\Exceptions\UnexpectedTypeException
+	 * Ensure an UnexpectedTypeException is a value passed to setUnitPrice
+	 *
+	 * TODO: Build this out for other potential value types
+	 *
+	 * @expectedException \AppBundle\Entities\Exceptions\UnexpectedTypeException
 	 */
 	public function testUnitPriceTypeException() {
 		$product = new Product();
@@ -82,6 +106,9 @@ class ProductTest extends \PHPUnit_Framework_TestCase {
 		$product->setUnitPrice( 'A string' );
 	}
 
+	/**
+	 * Ensure the the description is set correctly
+	 */
 	public function testDescriptionSetsString() {
 		$product = new Product();
 
@@ -90,7 +117,11 @@ class ProductTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException AppBundle\Entities\Exceptions\UnexpectedTypeException
+	 * Ensure an UnexpectedTypeException is a value passed to setDescription
+	 *
+	 * TODO: Build this out for other potential value types
+	 *
+	 * @expectedException \AppBundle\Entities\Exceptions\UnexpectedTypeException
 	 */
 	public function testDescriptionTypeException() {
 		$product = new Product();

@@ -8,10 +8,23 @@ use AppBundle\Services\Transformers\ProductCollection\Transformer;
 
 class TransformerTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * Sample product JSON
+	 *
+	 * @var string
+	 */
 	private $productJson = '{"title":"A title","size":"1.0kb","unit_price":"75.50","description":"A description"}';
 
+	/**
+	 * Sample product colleciton JSON
+	 *
+	 * @var string
+	 */
 	private $expectedJson = '{"results":[{"title":"A title","size":"1.0kb","unit_price":"75.50","description":"A description"},{"title":"A title","size":"1.0kb","unit_price":"75.50","description":"A description"}],"total":"151.00"}';
 
+	/**
+	 * Ensure a collection of products are transformed correctly
+	 */
 	public function testTransform() {
 
 		$baseProduct = new Product( [
