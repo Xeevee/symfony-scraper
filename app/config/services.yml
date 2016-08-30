@@ -9,9 +9,8 @@ services:
         class: GuzzleHttp\Client
 
     # Product Scraper
-    app.scrapers.product.scraper:
-        class: AppBundle\Services\Scrapers\Product\Scraper
-        arguments: ["@guzzle.client"]
+    app.scrapers.products.scraper:
+        class: AppBundle\Services\Scrapers\Products\Scraper
 
     # Product Transformer
     app.transformers.product.transformer:
@@ -25,6 +24,6 @@ services:
     # Convert Symfony Command to a server to enable DI
     app.command.run:
         class: AppBundle\Command\AppRunCommand
-        arguments: ["%app.command.run.default_name%", "@app.scrapers.product.scraper", "@app.transformers.product_collection.transformer"]
+        arguments: ["%app.command.run.default_name%", "@app.scrapers.products.scraper", "@app.transformers.product_collection.transformer"]
         tags:
             -  { name: console.command }

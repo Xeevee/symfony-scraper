@@ -6,9 +6,38 @@ namespace AppBundle\Services\Scrapers;
 interface ScraperInterface {
 
 	/**
-	 * Runs the scraper
+	 * ScraperInterface constructor.
 	 *
-	 * @return mixed
+	 * @param string $document
+	 * @param string $resource
 	 */
-	public function scrape();
+	public function __construct( $document = '', $resource = '' );
+
+	/**
+	 * Get the document
+	 *
+	 * @return string
+	 */
+	public function getDocument();
+
+	/**
+	 * Set the document
+	 *
+	 * @param $document
+	 */
+	public function setDocument( $document );
+
+	/**
+	 * Get the resource
+	 *
+	 * @return string
+	 */
+	public function getResource();
+
+	/**
+	 * Set the resource
+	 *
+	 * @param $resource
+	 */
+	public function setResource( $resource );
 }
