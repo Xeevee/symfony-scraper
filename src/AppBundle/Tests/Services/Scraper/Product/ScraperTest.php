@@ -34,6 +34,12 @@ class ScraperTest extends \PHPUnit_Framework_TestCase {
 		$scraper->getUnitPrice();
 	}
 
+	public function testGetUnitPriceRegExMatched() {
+
+		$scraper = new Scraper('<p class="pricePerUnit">Wrong format</p>');
+		$this->assertEquals('', $scraper->getUnitPrice());
+	}
+
 	public function testGetDescription() {
 		$scraper = new Scraper($this->sampleDocument);
 		$this->assertEquals('A description', $scraper->getDescription());
