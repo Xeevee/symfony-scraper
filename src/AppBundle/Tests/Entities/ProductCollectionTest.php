@@ -10,7 +10,7 @@ class ProductCollectionTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Ensure the constructor adds the products correctly
 	 *
-	 * @covers ProductCollection::addMultiple
+	 * @covers AppBundle\Entities\ProductCollection::addMultiple
 	 */
 	public function testConstructor() {
 		$products          = [
