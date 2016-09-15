@@ -10,6 +10,7 @@ use AppBundle\Services\Transformers\ProductCollection\TransformerInterface;
 use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Pool;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -105,14 +106,18 @@ class AppRunCommand extends ContainerAwareCommand {
 	/**
 	 * Get a response object
 	 *
-	 * @param string $url
+	 * @param array $urls
 	 *
-	 * @return ResponseInterface
+	 * @return \GuzzleHttp\BatchResults
 	 */
-	private function getResponse( $url ) {
-		$response = $this->client->get( $url );
+	private function getResponses( array $urls ) {
 
-		return $response;
+		$requests = [ ];
+		foreach ( $urls as $url ) {
+			$requests[] = $this->client->createRequest( 'GET', $url );
+		}
+
+		return Pool::batch( $this->client, $requests );
 	}
 
 	/**
@@ -156,12 +161,11 @@ class AppRunCommand extends ContainerAwareCommand {
 	 */
 	private function buildProductCollectionEntity( array $urls ) {
 		$productCollection = new ProductCollection();
+		$responses         = $this->getResponses( $urls );
 
-		foreach ( $urls as $url ) {
+		foreach ( $responses as $response ) {
 			$productCollection->add(
-				$this->buildProductEntity(
-					$this->getResponse( $url )
-				)
+				$this->buildProductEntity( $response )
 			);
 		}
 
